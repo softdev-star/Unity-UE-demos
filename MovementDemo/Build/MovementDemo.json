@@ -1,0 +1,11 @@
+{
+"companyName": "Playing with Color",
+"productName": "Movement Demo",
+"dataUrl": "MovementDemo.data.unityweb",
+"asmCodeUrl": "MovementDemo.asm.code.unityweb",
+"asmMemoryUrl": "MovementDemo.asm.memory.unityweb",
+"asmFrameworkUrl": "MovementDemo.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"splashScreenStyle": "Dark",
+"backgroundColor": "#222C36"
+}

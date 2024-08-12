@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display a popup on click</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    .mapboxgl-popup {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+	#side-panel {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		background: rgba(255, 255, 255, 0);
+		pointer-events:none;
+	}
+
+	@media (max-aspect-ratio: 1/1)
+	{
+	#photo {
+		object-fit:contain;
+		max-width:100%;
+		max-height:50%;
+	}
+	}
+	@media (min-aspect-ratio: 1/1){
+	#photo {
+		object-fit:contain;
+		max-width:30%;
+		max-height:50%;
+		filter: drop-shadow(0.5vh 0.5vh 10px rgba(0, 0, 0, 2));
+	}
+}
+	.marker {
+		display: block;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		padding: 0;
+		filter: drop-shadow(0.5vh 0.5vh 10px rgba(0, 0, 0, 2));
+	}
+	
+	.hiddenmarker {
+		display: block;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		padding: 0;
+		background: rgba(255, 255, 255, 0);
+		pointer-events:none;
+	}
+</style>
+<div id="map"></div>
+<div id="side-panel"></div>
+<script>
+var lastMarker;
+var lastElement;
+	mapboxgl.accessToken = 'pk.eyJ1IjoieGVub2x1cHVzIiwiYSI6ImNrOGx0bG53MTBnbGcza213eDVzaTZtcWQifQ.l2C4cF7Kyk1wNqOjxBqlag';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/satellite-v9',
+        center: [139.73, 35.6814094910545],
+        zoom: 12
+    });
+
+
+
+    map.on('load', () => {
+	
+	
+		
+	
+	
+        map.addSource('places', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'result.json'
+        });
+		
+		map.addSource('route0323', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_23.json'
+        });
+		map.addSource('route0324', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_24.json'
+        });
+		map.addSource('route03241', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_24_1.json'
+        });
+		map.addSource('route0325', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_25.json'
+        });
+		map.addSource('route03251', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_25_1.json'
+        });
+		map.addSource('route0326', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_26.json'
+        });
+		map.addSource('route03261', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_26_1.json'
+        });
+		map.addSource('route0327', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_27.json'
+        });
+		map.addSource('route0328', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_28.json'
+        });
+		map.addSource('route0329', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_29.json'
+        });
+		map.addSource('route0330', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_30.json'
+        });
+		map.addSource('route0331', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_03_31.json'
+        });
+		map.addSource('route0401', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'route_04_01.json'
+        });
+		
+		map.addLayer({
+				'id': 'route0323',
+				'type': 'line',
+				'source': 'route0323',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0324',
+				'type': 'line',
+				'source': 'route0324',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route03241',
+				'type': 'line',
+				'source': 'route03241',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0325',
+				'type': 'line',
+				'source': 'route0325',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route03251',
+				'type': 'line',
+				'source': 'route03251',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0326',
+				'type': 'line',
+				'source': 'route0326',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route03261',
+				'type': 'line',
+				'source': 'route03261',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0327',
+				'type': 'line',
+				'source': 'route0327',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0328',
+				'type': 'line',
+				'source': 'route0328',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0329',
+				'type': 'line',
+				'source': 'route0329',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0330',
+				'type': 'line',
+				'source': 'route0330',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0331',
+				'type': 'line',
+				'source': 'route0331',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+				'id': 'route0401',
+				'type': 'line',
+				'source': 'route0401',
+				'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+				'paint': {
+				'line-color': '#C12',
+				'line-width': 2
+			}
+		});
+		
+        // Add a layer showing the places.
+		/*
+        map.addLayer({
+            'id': 'places',
+            'type': 'symbol',
+            'source': 'places',
+            'layout': {
+                'icon-image': ['get', 'icon'],
+                'icon-allow-overlap': true
+            }
+        });*/
+		//var geojson;
+		var geojson;
+		fetch("result.json")
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => 
+		  {
+			geojson = data;
+			console.log(geojson)
+
+		// Add markers to the map.
+		for (const marker of geojson.features) {
+			// Create a DOM element for each marker.
+			const el = document.createElement('div');
+			const width = 5;
+			const height = 5;
+			el.className = 'marker';
+			//el.setHTML(marker.properties.image)
+			el.style.backgroundImage = marker.properties.imageloc;
+			el.style.width = `${width}vh`;
+			el.style.height = `${height}vh`;
+			el.style.backgroundSize = '100%';
+			 
+			el.addEventListener('click', () => {
+				//window.alert(marker.properties.message);
+				            // Copy coordinates array.
+				const coordinates = marker.geometry.coordinates.slice();
+				const description = marker.properties.description;
+				const image = marker.properties.image;
+				// Ensure that if the map is zoomed out such that multiple
+				// copies of the feature are visible, the popup appears
+				// over the copy being pointed to.
+				//while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				//	coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+				//}
+				
+				document.getElementById('side-panel').setHTML(image);
+				
+				//new mapboxgl.Popup()
+				//    .setLngLat(coordinates)
+				//    .setHTML(description)
+				//    .addTo(map);
+				if(lastMarker)
+					lastMarker.remove();
+
+				lastMarker = new mapboxgl.Marker()
+					.setLngLat(coordinates)
+					.addTo(map);
+ 
+			});
+		 
+		// Add markers to the map.
+			new mapboxgl.Marker(el)
+				.setLngLat(marker.geometry.coordinates)
+				.addTo(map);
+		}
+	  });
+/*
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+			const image = e.features[0].properties.image;
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+			
+			document.getElementById('side-panel').setHTML(image);
+			
+
+            //new mapboxgl.Popup()
+            //    .setLngLat(coordinates)
+            //    .setHTML(description)
+            //    .addTo(map);
+			if(lastMarker)
+				lastMarker.remove();
+
+			lastMarker = new mapboxgl.Marker()
+				.setLngLat(coordinates)
+				.addTo(map);
+
+        });
+*/
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+</script>
+
+</body>
+</html>

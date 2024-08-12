@@ -1,0 +1,129 @@
+Game Grumps VS:The Game
+===================
+Alpha v1.4.0 Release Nots
+-------------------
+Friday, April 17th, 2020
+-------------------
+Additions & Changes
+-------------------
++Added VFX System
+	+VFX for movements
+	+VFX system for attacks
+	+Arin attack VFX
+	+Dan attack VFX
+
+===================
+Alpha v1.3.0 Release Notes
+-------------------
+Friday, November 15th, 2019
+-------------------
+Additions & Changes
+-------------------
++Dan now has his own teetering animation
++Walls stage
++Wall interaction
+	+Knocking into walls
+	+Bumping into walls animation
++Jumping mechanics changed
+	+Hold jump button to do a regular jump
+	+Short hops are activated by releasing jump button right before jumping
+	+Press opposite direction of direction you're facing right before jumping to activate back jump
++Advanced Player & Environment Interaction
+	+Jumping on other players
+	+Players now push each other out of the way while on the ground
+	+In the air players ignore collision entirely
+	+Players are now pushed away from walls in order to not clip
+	+After landing after spin falling near edges, player is now pushed to be fully on the ground
+
+-------------------
+Bug Fixes
+-------------------
++Camera tracks vertical as well as horizontal movement now
++Holding on to the ledge too long makes you drop
++Correct animation plays when getting up
+
+===================
+Alpha v1.2.0 Release Notes
+-------------------
+Friday, November 8th, 2019
+-------------------
+Additions & Changes
+-------------------
++Dan!!!
+	+Unique Animations
+	+Unique Momentum 
+	+Unique Attacks
++Game now starts with Arin & Dan
++Ability to change character
+-------------------
+Bug Fixes
+-------------------
++Face textures now rotate with head
++Slight camera adjustments
++Improvements to momentum
+
+===================
+Alpha v1.1.0 Release Notes
+-------------------
+Friday, October 11th, 2019
+-------------------
+Additions & Changes
+-------------------
++Added Credits
++Brightened Text on Buttons
++Spiraling Down Falling
++Landing On the Ground
++Laying Down
++Getting Up
+-------------------
+Bug Fixes
+-------------------
++Improved Launching Momentum
++Improved In Air Momentum
+
+===================
+Alpha v1.0.0 Release Notes
+-------------------
+Friday, September 27th, 2019
+-------------------
+Additions & Changes
+-------------------
++Simple Character
++Movement Engine
+	+Momentum
+	+Walking
+	+Running
+	+Skidding
+	+Jumping(needs work)
+	+Short Hops(controller only)
+	+Double Jump
+	+Hitting Head on ceiling
+	+Ledgework
+		*Grabbing
+		*Jumping Up
+		*Climbing Up
+	+One way platforms
+	+Teetering on edges(needs work)
++Added Simple Player predictive camera
++Random Background Cubes
++Simple Attack Builder
+	+Arin's Basic Attacks 
+	+Arin's Smash Attacks
++Basics of Fighting Engine Implemented
+	+Percentage Increase
+	+Getting Hit/ Shaking
+	+Rudementary Launching(needs work)
++Changed Simple Character to Arin
++Random Cubes are now Spheres
++Basic Interface "Debugger Interface"
+	+Load and Unload Multiple Stages
+	+Handles information of 4 players(percentage, location on screen, keyboard inputs, etc.)
+	+Game Logo
+	+Version Info
++Changed Camera to work with the positions of the four players as found in Debugger Interface
++HTML Additions
+	+Link to Patreon, Twitter, and YouTube
+	+Release Notes
+	+Dan Coming Soon
+-------------------
+Bug Fixes will be written here in later versions
